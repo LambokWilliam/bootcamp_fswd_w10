@@ -24,7 +24,7 @@ router.post('/upload/:id/photo', multer({ storage: diskStorage }).single('photo'
       message: 'No file is selected',
     });
   } else {
-    const updateMovieUrl = `
+    const updateMoviePhoto = `
         UPDATE movies
         SET photo = $1
         WHERE id = $2
@@ -32,7 +32,7 @@ router.post('/upload/:id/photo', multer({ storage: diskStorage }).single('photo'
 
     const photo = `http://localhost:3000/upload/${req.file.filename}`;
 
-    pool.query(updateMovieUrl, [photo, id], (err, result) => {
+    pool.query(updateMoviePhoto, [photo, id], (err, result) => {
       if (err) {
         throw err;
       } else {
